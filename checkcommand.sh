@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo test1test1test1
+echo testsuccesstesttestsuccesstesttestsuccesstesttestsuccesstest
 
 workingtest="xxx3.2.3xxx"
 if [[ $workingtest = *[0-9].* ]];then
@@ -9,7 +9,10 @@ else
   echo "result does not contain [0-9]. inside of it"
 fi
 
-echo test5test5test5
+echo testsuccesstesttestsuccesstesttestsuccesstesttestsuccesstest
+
+
+echo testfailtesttestfailtesttestfailtest
 
 workingtest5="xxxxxxxxx"
 if [[ $workingtest5 = *[0-9].* ]];then
@@ -18,22 +21,34 @@ else
   echo "result does not contain [0-9]. inside of it"
 fi
 
-echo test6test6test6
+echo testfailtesttestfailtesttestfailtest
 
-#python --version >>checkversionpython.txt
+echo testfirsttesttestfirsttesttestfirsttest
 
-echo itdidnotshowuptwice
-python --version >>checkversionpython.txt 2>&1
-cat checkversionpython.txt
-echo itdidnotshowuptwice
+python --version >>checkversionpythonfirst.txt
 
+cvpythonfirst=$(cat checkversionpython.txt)
 
-cvpython=$(cat checkversionpython.txt)
-
-if [[ $cvpython = *[0-9].* ]];then
+if [[ $cvpythonfirst = *[0-9].* ]];then
   echo "result contains [0-9]. inside of it"
 else
   echo "result does not contain [0-9]. inside of it"
 fi
+
+echo testfirsttesttestfirsttesttestfirsttest
+
+echo testsecondttesttestsecondttesttestsecondttest
+
+python --version >>checkversionpythonsecond.txt 2>&1
+
+cvpythonsecond=$(cat checkversionpython.txt)
+
+if [[ $cvpythonsecond = *[0-9].* ]];then
+  echo "result contains [0-9]. inside of it"
+else
+  echo "result does not contain [0-9]. inside of it"
+fi
+
+echo testsecondttesttestsecondttesttestsecondttest
 
 echo goodnight
