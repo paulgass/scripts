@@ -23,7 +23,7 @@ fi
 
 echo testfailtesttestfailtesttestfailtest
 
-echo testfirsttesttestfirsttesttestfirsttest
+echo testPYTHONfirsttesttestfirsttesttestfirstPYTHONtest
 
 python --version >>checkversionpythonfirst.txt
 
@@ -35,9 +35,9 @@ else
   echo "result does not contain [0-9]. inside of it"
 fi
 
-echo testfirsttesttestfirsttesttestfirsttest
+echo testPYTHONfirsttesttestfirsttesttestfirstPYTHONtest
 
-echo testsecondttesttestsecondttesttestsecondttest
+echo testPYTHONsecondttesttestsecondttesttestsecondPYTHONttest
 
 python --version >>checkversionpythonsecond.txt 2>&1
 
@@ -49,6 +49,6 @@ else
   echo "result does not contain [0-9]. inside of it"
 fi
 
-echo testsecondttesttestsecondttesttestsecondttest
+echo testPYTHONsecondttesttestsecondttesttestsecondPYTHONttest
 
 echo goodnight
