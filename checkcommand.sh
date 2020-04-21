@@ -23,6 +23,7 @@ echo test6test6test6
 #python --version >>checkversionpython.txt 2>&1
 python --version >>checkversionpython.txt
 
+cat checkversionpython.txt
 cvpython=$(cat checkversionpython.txt)
 
 if [[ $cvpython = *[0-9].* ]];then
