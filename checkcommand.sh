@@ -20,10 +20,14 @@ fi
 
 echo test6test6test6
 
-#python --version >>checkversionpython.txt 2>&1
-python --version >>checkversionpython.txt
+#python --version >>checkversionpython.txt
 
+echo itdidnotshowuptwice
+python --version >>checkversionpython.txt 2>&1
 cat checkversionpython.txt
+echo itdidnotshowuptwice
+
+
 cvpython=$(cat checkversionpython.txt)
 
 if [[ $cvpython = *[0-9].* ]];then
