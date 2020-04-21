@@ -9,16 +9,6 @@ else
   echo "result does not contain [0-9]. inside of it"
 fi
 
-echo test4test4test4
-
-checkcommandtest=$(python --version)
-
-if [[ $checkcommandtest = *[0-9].* ]];then
-  echo "result contains [0-9]. inside of it"
-else
-  echo "result does not contain [0-9]. inside of it"
-fi
-
 echo test5test5test5
 
 workingtest5="xxxxxxxxx"
