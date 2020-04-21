@@ -27,7 +27,7 @@ echo testfirsttesttestfirsttesttestfirsttest
 
 python --version >>checkversionpythonfirst.txt
 
-cvpythonfirst=$(cat checkversionpython.txt)
+cvpythonfirst=$(cat checkversionpythonfirst.txt)
 
 if [[ $cvpythonfirst = *[0-9].* ]];then
   echo "result contains [0-9]. inside of it"
@@ -41,7 +41,7 @@ echo testsecondttesttestsecondttesttestsecondttest
 
 python --version >>checkversionpythonsecond.txt 2>&1
 
-cvpythonsecond=$(cat checkversionpython.txt)
+cvpythonsecond=$(cat checkversionpythonsecond.txt)
 
 if [[ $cvpythonsecond = *[0-9].* ]];then
   echo "result contains [0-9]. inside of it"
