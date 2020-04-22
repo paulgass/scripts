@@ -1,9 +1,9 @@
 #!/bin/bash
 
 linux_distro_version_name=$(lsb_release -si)
-#ldv_name="echo '$linux_distro_version_name' | sed -e 's/\(.*\)/\L\1/'"
-#ldv_name="echo '$linux_distro_version_name' | awk '{print tolower($0)}'"
-ldv_name="sed -e 's/\(.*\)/\L\1/' <<< '$linux_distro_version_name'"
+#ldv_name=$(echo "$linux_distro_version_name" | sed -e 's/\(.*\)/\L\1/')
+#ldv_name=$(echo "$linux_distro_version_name" | awk '{print tolower($0)}')
+ldv_name=$(sed -e 's/\(.*\)/\L\1/' <<< "$linux_distro_version_name")
 
 linux_distro_version_id=$(lsb_release -sr)
 ldv_id="sed -e 's/\(.*\)/\L\1/' <<< '$linux_distro_version_name'"
