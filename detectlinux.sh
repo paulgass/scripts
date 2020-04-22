@@ -1,41 +1,41 @@
 #!/bin/bash
 
-linux_distro_version_name=$(lsb_release -si)
-#ldv_name=$(echo "$linux_distro_version_name" | sed -e 's/\(.*\)/\L\1/')
-#ldv_name=$(echo "$linux_distro_version_name" | awk '{print tolower($0)}')
-ldv_name=$(sed -e 's/\(.*\)/\L\1/' <<< "$linux_distro_version_name")
+placeholder_linux_distro_version_name=$(lsb_release -si)
+linux_distro_version_name=$(sed -e 's/\(.*\)/\L\1/' <<< "$placeholder_linux_distro_version_name")
 
 linux_distro_version_id=$(lsb_release -sr)
 
 echo ""
-echo "this is a $linux_distro_version_name $linux_distro_version_id system"
 echo ""
-echo "$ldv_name"
+echo "Linux Distro Version Name:"
+echo "$linux_distro_version_name"
+echo ""
+echo "Linux Distro Version ID:"
 echo "$linux_distro_version_id"
 echo ""
 
-if [ $ldv_name == 'debian' ] ; then
+if [ $linux_distro_version_name == 'debian' ] ; then
 	cd
 	echo "plan to use apt-get"
 fi
 
 cd
 
-if [ $ldv_name == 'ubuntu' ] ; then
+if [ $linux_distro_version_name == 'ubuntu' ] ; then
 	cd
 	echo "plan to use apt-get"
 fi
 
 cd
 
-if [ $ldv_name == 'fedora' ] ; then
+if [ $linux_distro_version_name == 'fedora' ] ; then
 	cd
 	echo "plan to use yum"
 fi
 
 cd
 
-if [ $ldv_name == 'centos' ] ; then
+if [ $linux_distro_version_name == 'centos' ] ; then
 	cd
 	echo "plan to use yum"
 fi
