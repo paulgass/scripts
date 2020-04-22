@@ -31,10 +31,10 @@ ubuntu)
 	echo "use apt-get"
 	;;
 fedora)
-	echo "use apt-get"
+	echo "use yum"
 	;;
 centos)
-	echo "use apt-get"
+	echo "use yum"
 	;;
 *)
 	echo "linux distro not recognized by this script"
