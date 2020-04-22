@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# yum install redhat-lsb-core 
+#or
+# yum install redhat-lsb
+
+# dnf install redhat-lsb-core
+#or
+# dnf install redhat-lsb
+
 placeholder_linux_distro_version_name=$(lsb_release -si)
 linux_distro_version_name=$(sed -e 's/\(.*\)/\L\1/' <<< "$placeholder_linux_distro_version_name")
 
