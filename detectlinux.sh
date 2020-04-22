@@ -21,21 +21,22 @@ fi
 
 cd
 
-if [ $linux_distro_version_name == 'ubuntu' ] ; then
-	cd
-	echo "plan to use apt-get"
-fi
+echo "install instructions below"
 
-cd
-
-if [ $linux_distro_version_name == 'fedora' ] ; then
-	cd
-	echo "plan to use yum"
-fi
-
-cd
-
-if [ $linux_distro_version_name == 'centos' ] ; then
-	cd
-	echo "plan to use yum"
-fi
+case $linux_distro_version_name in
+debian)
+	echo "use apt-get"
+	;;
+ubuntu)
+	echo "use apt-get"
+	;;
+fedora)
+	echo "use apt-get"
+	;;
+centos)
+	echo "use apt-get"
+	;;
+*)
+	echo "linux distro not recognized by this script"
+	;;
+esac
