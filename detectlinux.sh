@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# yum install redhat-lsb-core 
+# apt-get update -y && apt-get upgrade -y && apt-get install lsb-release -y && apt-get clean all
 #or
-# yum install redhat-lsb
+# apt-get update -y && apt-get upgrade -y && apt-get install lsb-release-core -y && apt-get clean all
+
+# yum update -y && yum upgrade -y && yum install redhat-lsb-core -y
+#or
+# yum update -y && yum upgrade -y && yum install redhat-lsb -y
 
 # dnf install redhat-lsb-core
 #or
