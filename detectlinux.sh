@@ -6,13 +6,12 @@ linux_distro_version_name=$(lsb_release -si)
 ldv_name=$(sed -e 's/\(.*\)/\L\1/' <<< "$linux_distro_version_name")
 
 linux_distro_version_id=$(lsb_release -sr)
-ldv_id="sed -e 's/\(.*\)/\L\1/' <<< '$linux_distro_version_name'"
 
 echo ""
 echo "this is a $linux_distro_version_name $linux_distro_version_id system"
 echo ""
 echo "$ldv_name"
-echo "$ldv_id"
+echo "$linux_distro_version_id"
 echo ""
 
 if [ $ldv_name == 'debian' ] ; then
