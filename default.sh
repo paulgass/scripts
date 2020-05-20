@@ -66,6 +66,7 @@ packagemanagerversion () {
    else
       echo "$1 configuration NOT found."
    fi
+   rm pmv.txt
 }
 
 packagemanagerversion rpm
