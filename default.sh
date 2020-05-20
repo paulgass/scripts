@@ -59,7 +59,7 @@ fi
 echo "Package Manager Function..."
 
 packagemanagerversion () {
-   $1 --version >>pmv.txt 2>&1
+   $1 --version >>pmv.txt 2>1
    version=$(cat pmv.txt)
    if [[ $version = *[0-9]* ]] ; then
       echo "$1 configuration found."
