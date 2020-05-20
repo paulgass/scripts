@@ -62,7 +62,7 @@ packagemanagerversion () {
    echo hello
    $1 --version
    echo goodbye
-   $1 --version >> pmv.txt
+   $1 --version >>pmv.txt
    echo hola
    cat pmv.txt
    echo adios
