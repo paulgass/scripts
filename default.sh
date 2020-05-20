@@ -27,6 +27,7 @@ echo "lolworldlol"
 
 if [[ $lsbversion = *[0-9]* ]] ; then
    packagemanager="default"
+   echo "package set to default stuff"
 else
    echo "lsb_release command not found."
 fi
