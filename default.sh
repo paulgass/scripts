@@ -42,6 +42,8 @@ packagemanagerversion () {
    fi
 }
 
+echo $packagemanager
+
 if [ $packagemanager != "" ] ; then
    packagemanagerversion "rpm"
    packagemanagerversion "yum"
