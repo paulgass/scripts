@@ -19,11 +19,9 @@ fi
 
 packagemanager=""
 
-lsb_release --release --short >lsbversion.txt
+lsbversion=$(lsb_version --short --release)
 
-lsbv=$(cat lsbversion.txt)
-
-if [[ $lsbv = *[0-9]* ]] ; then
+if [[ $lsbversion = *[0-9]* ]] ; then
    packagemanager="default"
 else
    echo "lsb_release command not found."
