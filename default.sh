@@ -17,24 +17,17 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-NOWSECOND=$(date +"%Y%m%d%H%M%S")
-scriptfolder=script${NOWSECOND}folder
-mkdir $scriptfolder
-cd $scriptfolder/
-directory=$(pwd)
-cd $directory/
+packagemanager=""
 
-lsb_release --release --short >>versionlsbrelease.txt 2>&1
+lsb_release --release --short >lsbversion.txt 2>&1
 
-versionlsbrelease=$(cat versionlsbrelease.txt)
+lsbv=$(cat lsbversion.txt)
 
-if [ $versionlsbrelease = *[0-9]* ] ; then
+if [ $lsbv = *[0-9]* ] ; then
    packagemanager="default"
 else
    echo "lsb_release command not found."
 fi
-
-echo "Package Manager Function..."
 
 packagemanagerversion () {
    $1 --version >pmv.txt 2>1
@@ -46,12 +39,14 @@ packagemanagerversion () {
    fi
 }
 
-packagemanagerversion "rpm"
-packagemanagerversion "yum"
-packagemanagerversion "dnf"
-packagemanagerversion "apt"
-packagemanagerversion "apt-get"
-packagemanagerversion "zypper"
-packagemanagerversion "pacman"
+if [ $packagemanager != "" ] ; then
+   packagemanagerversion "rpm"
+   packagemanagerversion "yum"
+   packagemanagerversion "dnf"
+   packagemanagerversion "apt"
+   packagemanagerversion "apt-get"
+   packagemanagerversion "zypper"
+   packagemanagerversion "pacman"
+fi
 
 echo goodnightlol
