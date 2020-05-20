@@ -23,7 +23,7 @@ lsb_release --release --short >lsbversion.txt 2>&1
 
 lsbv=$(cat lsbversion.txt)
 
-if [ $lsbv = *[0-9]* ] ; then
+if [[ $lsbv = *[0-9]* ]] ; then
    packagemanager="default"
 else
    echo "lsb_release command not found."
