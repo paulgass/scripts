@@ -62,7 +62,10 @@ packagemanagerversion () {
    echo hello
    $1 --version
    echo goodbye
-   $1 --version >>pmv.txt 2>&1
+   $1 --version >> pmv.txt
+   echo hola
+   cat pmv.txt
+   echo adios
    version=$(cat pmv.txt)
    if [[ $version = *[0-9]* ]] ; then
       echo "$1 configuration found."
