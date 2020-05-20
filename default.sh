@@ -38,7 +38,7 @@ packagemanagerversion () {
    fi
 }
 
-if [[ $packagemanager == "default" ]] ; then
+if [[ $packagemanager != "default" ]] ; then
    packagemanagerversion "rpm"
    packagemanagerversion "yum"
    packagemanagerversion "dnf"
