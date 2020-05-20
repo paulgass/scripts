@@ -21,10 +21,6 @@ packagemanager=""
 
 lsbversion=$(lsb_release --short --release)
 
-echo "helloworld"
-echo $lsbversion
-echo "lolworldlol"
-
 if [[ $lsbversion = *[0-9]* ]] ; then
    packagemanager="default"
    echo "package set to default stuff"
@@ -34,17 +30,15 @@ fi
 
 packagemanagerversion () {
    $1 --version >pmv.txt 2>1
-   version=$(cat pmv.txt)
-   if [[ $version = *[0-9]* ]] ; then
-      echo "$1 configuration found."
+   v=$(cat pmv.txt)
+   if [[ $v = *[0-9]* ]] ; then
+      echo "$1 package manger found."
    else
-      echo "$1 configuration NOT found."
+      echo "$1 package manger NOT found."
    fi
 }
 
-echo $packagemanager
-
-if [ $packagemanager != "" ] ; then
+if [ $packagemanager != "default" ] ; then
    packagemanagerversion "rpm"
    packagemanagerversion "yum"
    packagemanagerversion "dnf"
