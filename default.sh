@@ -41,10 +41,8 @@ packagemanagerversion () {
 }
 
 if [[ $packagemanager != "default" ]] ; then
-   packagemanagerversion "rpm"
    packagemanagerversion "yum"
    packagemanagerversion "dnf"
-   packagemanagerversion "apt"
    packagemanagerversion "apt-get"
    packagemanagerversion "zypper"
    packagemanagerversion "pacman"
