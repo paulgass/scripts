@@ -19,7 +19,7 @@ fi
 
 packagemanager=""
 
-lsbversion=$(lsb_version --short --release)
+lsbversion=$(lsb_release --short --release)
 
 if [[ $lsbversion = *[0-9]* ]] ; then
    packagemanager="default"
