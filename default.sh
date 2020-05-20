@@ -44,54 +44,36 @@ print_something Jupiter
 #zypper --version >>versionzypper.txt 2>&1
 
 #pacman --version >>versionpacman.txt 2>&1
-packagemanager=""
 
-echo "...lsb_release..."
 
-lsb_release --version >>versionlsbrelease.txt 2>&1
+lsb_release --release --short >>versionlsbrelease.txt 2>&1
 
 versionlsbrelease=$(cat versionlsbrelease.txt)
 
-if [ $versionlsbrelease = *[0-9].* ] ; then
+if [ $versionlsbrelease = *[0-9]* ] ; then
    packagemanager="default"
 else
    echo "lsb_release command not found."
 fi
 
-echo "...rpm..."
+echo "Package Manager Function..."
 
-apt --version >>versionrpm.txt 2>&1
+packagemanagerversion () {
+   $1 --version >>pmv.txt 2>&1
+   version=$(cat pmv.txt)
+   if [ $version = *[0-9]* ] ; then
+      echo "$1 configuration found."
+   else
+      echo "$1 configuration NOT found."
+   fi
+}
 
-versionrpm=$(cat versionrpm.txt)
-
-if [ $packagemanager != "" ] && [ $versionrpm = *[0-9].* ] ; then
-   packagemanager="rpm"
-else
-   echo "RPM configuration not found."
-fi
-
-echo "...apt..."
-
-apt --version >>versionapt.txt 2>&1
-
-versionapt=$(cat versionapt.txt)
-
-if [ $packagemanager != "" ] && [ $versionapt = *[0-9].* ] ; then
-   packagemanager="apt"
-else
-   echo "APT configuration not found."
-fi
-
-echo "...apt-get..."
-
-apt-get --version >>versionaptget.txt 2>&1
-
-versionaptget=$(cat versionaptget.txt)
-
-if [ $packagemanager != "" ] && [ $versionaptget = *[0-9].* ] ; then
-   packagemanager="apt-get"
-else
-   echo "APT-GET configuration not found."
-fi
+packagemanagerversion rpm
+packagemanagerversion yum
+packagemanagerversion dnf
+packagemanagerversion apt
+#packagemanagerversion apt-get
+packagemanagerversion zypper
+packagemanagerversion pacman
 
 echo goodnight
