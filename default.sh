@@ -24,28 +24,6 @@ cd $scriptfolder/
 directory=$(pwd)
 cd $directory/
 
-print_something () {
-   echo Hello $1
-}
-
-print_something Mars
-print_something Jupiter
-
-#apt --version >>versionapt.txt 2>&1
-
-#apt-get --version >>versionaptget.txt 2>&1
-
-#rpm --version >>versionrpm.txt 2>&1
-
-#yum --version >>versionyum.txt 2>&1
-
-#dnf --version >>versiondnf.txt 2>&1
-
-#zypper --version >>versionzypper.txt 2>&1
-
-#pacman --version >>versionpacman.txt 2>&1
-
-
 lsb_release --release --short >>versionlsbrelease.txt 2>&1
 
 versionlsbrelease=$(cat versionlsbrelease.txt)
@@ -68,13 +46,13 @@ packagemanagerversion () {
    fi
 }
 
-packagemanagerversion rpm
-packagemanagerversion yum
-packagemanagerversion dnf
-packagemanagerversion apt
-#packagemanagerversion apt-get
-packagemanagerversion zypper
-packagemanagerversion pacman
-packagemanagerversion dnf
+packagemanagerversion "rpm"
+packagemanagerversion "yum"
+packagemanagerversion "dnf"
+packagemanagerversion "apt"
+packagemanagerversion "apt-get"
+packagemanagerversion "zypper"
+packagemanagerversion "pacman"
+packagemanagerversion "dnf"
 
-echo goodnight
+echo goodnightlol
