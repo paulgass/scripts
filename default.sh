@@ -53,6 +53,5 @@ packagemanagerversion "apt"
 packagemanagerversion "apt-get"
 packagemanagerversion "zypper"
 packagemanagerversion "pacman"
-packagemanagerversion "dnf"
 
 echo goodnightlol
