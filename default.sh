@@ -21,6 +21,10 @@ packagemanager=""
 
 lsbversion=$(lsb_release --short --release)
 
+echo "helloworld"
+echo $lsbversion
+echo "lolworldlol"
+
 if [[ $lsbversion = *[0-9]* ]] ; then
    packagemanager="default"
 else
