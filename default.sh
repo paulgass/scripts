@@ -49,4 +49,4 @@ if [ $packagemanager != "" ] ; then
    packagemanagerversion "pacman"
 fi
 
-echo goodnightlol
+echo goodnightlollol
