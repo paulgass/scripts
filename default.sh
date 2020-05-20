@@ -18,12 +18,10 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 packagemanager=""
+lsbversionnumber=$(lsb_release --short --release)
 
-lsbversion=$(lsb_release --short --release)
-
-if [[ $lsbversion = *[0-9]* ]] ; then
+if [[ $lsbversionnumber = *[0-9]* ]] ; then
    packagemanager="default"
-   echo "package set to default stuff"
 else
    echo "lsb_release command not found."
 fi
