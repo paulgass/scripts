@@ -59,6 +59,9 @@ fi
 echo "Package Manager Function..."
 
 packagemanagerversion () {
+   echo hello
+   $1 --version
+   echo goodbye
    $1 --version >>pmv.txt 2>&1
    version=$(cat pmv.txt)
    if [[ $version = *[0-9]* ]] ; then
