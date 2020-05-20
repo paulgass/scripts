@@ -19,7 +19,7 @@ fi
 
 packagemanager=""
 
-lsb_release --release --short >lsbversion.txt 2>&1
+lsb_release --release --short >lsbversion.txt
 
 lsbv=$(cat lsbversion.txt)
 
