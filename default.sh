@@ -10,8 +10,6 @@ lsbreleaseversionnumber=$(lsb_release --short --release)
 if [[ $lsbreleaseversionnumber = *[0-9]* ]]
 then
    packagemanager="default"
-else
-   break
 fi
 
 packagemanagerversion () {
