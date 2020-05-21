@@ -37,7 +37,7 @@ attemptlsbinstall () {
    rm packagemangerversion.txt
 }
 
-systemlsb=checksystemforlsb
+systemlsb=false
 
 while [ systemlsb == false ]
 do
