@@ -2,12 +2,12 @@
 
 function myfunc()
 {
-    local  __resultvar=$1
-    local  myresult='some value'
-    if [[ "$__resultvar" ]]; then
-        eval $__resultvar="'$myresult'"
+    local  x=$1
+    local  y='some value'
+    if [[ "$x" ]]; then
+        eval $x="'$y'"
     else
-        echo "$myresult"
+        echo "$y"
     fi
 }
 
