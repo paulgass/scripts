@@ -33,7 +33,7 @@ attemptlsbinstall () {
       then
          pacman -Syu lsb-release
       fi
-      eval $systemlsb=1
+      eval systemlsb=1
    fi
    rm packagemangerversion.txt
 }
