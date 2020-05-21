@@ -1,13 +1,13 @@
 #!/bin/bash
 
 checksystemforlsb () {
-   systemlsb=0
+   local x=0
    local a=$(lsb_release --short --release)
    if [[ $a = *[0-9]* ]]
    then
-      systemlsb=1
+      x=1
    fi
-   return $x
+   eval systemlsb=$x
 }
 
 attemptlsbinstall () {
@@ -42,15 +42,10 @@ systemlsb=$(checksystemforlsb)
 while [ systemlsb != 1 ]
 do
    attemptlsbinstall "yum"
-   #systemlsb=$(checksystemforlsb)
    attemptlsbinstall "dnf"
-   #systemlsb=$(checksystemforlsb)
    attemptlsbinstall "apt-get"
-   #systemlsb=$(checksystemforlsb)
    attemptlsbinstall "zypper"
-   #systemlsb=$(checksystemforlsb)
    attemptlsbinstall "pacman"
-   #systemlsb=$(checksystemforlsb)
 done
 
 systemostype="default"
