@@ -7,7 +7,7 @@ checksystemforlsb () {
    then
       x=1
    fi
-   eval systemlsb=$x
+   eval $systemlsb=$x
 }
 
 attemptlsbinstall () {
