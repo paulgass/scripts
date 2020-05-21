@@ -4,14 +4,6 @@
 #maybe change to #!/bin/sh
 #this scripts should work for the following: #debian #ubuntu #centos #fedora #openSUSE #arch#macoszsh #macosbash
 
-packagemanager=""
-lsbreleaseversionnumber=$(lsb_release --short --release)
-
-if [[ $lsbreleaseversionnumber = *[0-9]* ]]
-then
-   packagemanager="default"
-fi
-
 packagemanagerversion () {
    $1 --version >pmv.txt 2>1
    v=$(cat pmv.txt)
@@ -37,6 +29,14 @@ packagemanagerversion () {
       echo "$1 package manger NOT found."
    fi
 }
+
+packagemanager=""
+lsbreleaseversionnumber=$(lsb_release --short --release)
+
+if [[ $lsbreleaseversionnumber = *[0-9]* ]]
+then
+   packagemanager="default"
+fi
 
 if [[ $packagemanager != "default" ]] ; then
    packagemanagerversion "yum"
