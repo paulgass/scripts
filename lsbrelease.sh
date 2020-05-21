@@ -1,11 +1,11 @@
 #!/bin/bash
 
 checksystemforlsb () {
-   x=false
+   x=0
    a=$(lsb_release --short --release)
    if [[ $a = *[0-9]* ]]
    then
-      x=true
+      x=1
    fi
    return x
 }
@@ -37,9 +37,9 @@ attemptlsbinstall () {
    rm packagemangerversion.txt
 }
 
-systemlsb=false
+systemlsb=0
 
-while [ systemlsb == false ]
+while [ systemlsb == 0 ]
 do
    attemptlsbinstall "yum"
    systemlsb=checksystemforlsb
