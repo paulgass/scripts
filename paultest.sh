@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "xxxxxxxxxxxx"
+
 function myfunc()
 {
     local  x=$1
