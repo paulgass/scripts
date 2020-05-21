@@ -1,0 +1,12 @@
+3.4.3
+  Installed: rpm-4.11.3-40.el7.x86_64 at 2020-04-07 14:35
+  Built    : CentOS BuildSystem <http://bugs.centos.org> at 2019-08-06 22:50
+  Committed: Pavlina Moravcova Varekova <pmoravco@redhat.com> at 2019-05-26
+
+  Installed: yum-3.4.3-163.el7.centos.noarch at 2020-04-07 14:36
+  Built    : CentOS BuildSystem <http://bugs.centos.org> at 2019-08-08 11:57
+  Committed: CentOS Sources <bugs@centos.org> at 2019-08-06
+
+  Installed: yum-plugin-fastestmirror-1.1.31-52.el7.noarch at 2020-04-07 14:36
+  Built    : CentOS BuildSystem <http://bugs.centos.org> at 2019-08-09 03:26
+  Committed: Michal Domonkos <mdomonko@redhat.com> at 2019-04-26
