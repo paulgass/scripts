@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "xxxxxxxxxxxx"
-
 function myfunc()
 {
     local  __resultvar=$1
@@ -13,10 +11,8 @@ function myfunc()
     fi
 }
 
-myfunc xxx
+myfunc result
 echo "yyyyyyyyyyy"
-echo $xxx
-echo "ouch"
 echo $result
 echo "zzzzzzzzzzz"
 result2=$(myfunc)

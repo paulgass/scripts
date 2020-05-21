@@ -7,7 +7,7 @@ checksystemforlsb () {
    then
       x=1
    fi
-   eval $systemlsb=$x
+   return $x
 }
 
 attemptlsbinstall () {
@@ -33,6 +33,7 @@ attemptlsbinstall () {
       then
          pacman -Syu lsb-release
       fi
+      eval systemlsb=1
    fi
    rm packagemangerversion.txt
 }
