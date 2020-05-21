@@ -7,7 +7,7 @@ checksystemforlsb () {
    then
       x=1
    fi
-   return x
+   return $x
 }
 
 attemptlsbinstall () {
