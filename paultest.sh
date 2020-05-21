@@ -1,21 +1,11 @@
 #!/bin/bash
 
-echo "xxxxxxxxxxxx"
-
 function myfunc()
 {
-    local  x=$1
-    local  y='some value'
-    if [[ "$x" ]]; then
-        eval $x="'$y'"
-    else
-        echo "$y"
-    fi
+    local  result=$1
+    local  myresult='some value'
+    eval $result="'$myresult'"
 }
 
 myfunc result
-echo "yyyyyyyyyyy"
 echo $result
-echo "zzzzzzzzzzz"
-result2=$(myfunc)
-echo $result2
