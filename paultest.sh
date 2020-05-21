@@ -13,8 +13,10 @@ function myfunc()
     fi
 }
 
-myfunc result
+myfunc xxx
 echo "yyyyyyyyyyy"
+echo $xxx
+echo "ouch"
 echo $result
 echo "zzzzzzzzzzz"
 result2=$(myfunc)
