@@ -33,7 +33,6 @@ attemptlsbinstall () {
       then
          pacman -Syu lsb-release
       fi
-      eval systemlsb=1
    fi
    rm packagemangerversion.txt
 }
@@ -43,10 +42,15 @@ systemlsb=$(checksystemforlsb)
 while [ systemlsb != 1 ]
 do
    attemptlsbinstall "yum"
+   checksystemforlsb
    attemptlsbinstall "dnf"
+   checksystemforlsb
    attemptlsbinstall "apt-get"
+   checksystemforlsb
    attemptlsbinstall "zypper"
+   checksystemforlsb
    attemptlsbinstall "pacman"
+   checksystemforlsb
 done
 
 systemostype="default"
