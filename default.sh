@@ -1,69 +1,67 @@
 #!/bin/bash
 
-checksystemforpackagemanager () {
-   $1 --version >pmv.txt 2>1
-   v=$(cat pmv.txt)
-   if [[ $v != *[0-9]* ]]
+checksystemforlsb () {
+   x=false
+   a=$(lsb_release --short --release)
+   if [[ $a = *[0-9]* ]]
    then
-      echo "$1 package manger NOT found."
+      x=true
    fi
-   rm pmv.txt
+   return x
 }
 
-defaultpackagemanager="none"
-lsbreleaseversionnumber=$(lsb_release --short --release)
-
-if [[ $lsbreleaseversionnumber = *[0-9]* ]]
-then
-   os=$(lsb_release --short --id)
-   if [[ $os = *centos* ]]
+attemptlsbinstall () {
+   $1 --version >packagemangerversion.txt 2>1
+   x=$(cat packagemangerversion.txt)
+   if [[ $x != *[0-9]* ]]
    then
-      defaultpackagemanager="yum"
-   elif [[ $os = *debian* ]] || [[ $os = *ubuntu* ]]
-   then
-      defaultpackagemanager="apt-get"
-   elif [[ $os == *fedora* ]]
-   then
-      defaultpackagemanager="dnf"
-   elif [[ $os == *opensuse* ]]
-   then
-      defaultpackagemanager="zypper"
-   elif [[ $os == *arch* ]]
-   then
-      defaultpackagemanager="pacman"
+      echo "$1 package manger NOT found."
    else
-      echo "cannot determine package manager for $os"
+      if [ $1 == "yum" ]
+      then
+         sudo yum -y update && sudo yum -y install redhat-lsb-core
+      elif [ $1 == "dnf" ]
+      then
+         sudo dnf -y update && sudo dnf -y install redhat-lsb-core
+      elif [ $1 == "apt-get" ]
+      then
+         sudo apt-get update -y && sudo apt-get install -y lsb-core
+      elif [ $1 == "zypper" ]
+      then
+         sudo zypper update -y && sudo zypper install -y lsb-core
+      elif [ $1 == "pacman" ]
+      then
+         pacman -Syu lsb-release
+      fi
    fi
-fi
+   rm packagemangerversion.txt
+}
 
-if [[ $defaultpackagemanager == "none" ]]
+systemlsb=checksystemforlsb
+
+while [ systemlsb == false ]
+do
+   attemptlsbinstall "yum"
+   systemlsb=checksystemforlsb
+   attemptlsbinstall "dnf"
+   systemlsb=checksystemforlsb
+   attemptlsbinstall "apt-get"
+   systemlsb=checksystemforlsb
+   attemptlsbinstall "zypper"
+   systemlsb=checksystemforlsb
+   attemptlsbinstall "pacman"
+   systemlsb=checksystemforlsb
+done
+
+systemosname="default"
+systemosversion="default"
+
+if [ systemlsb == false ]
 then
-   checksystemforpackagemanager "yum"
-   checksystemforpackagemanager "dnf"
-   checksystemforpackagemanager "apt-get"
-   checksystemforpackagemanager "zypper"
-   checksystemforpackagemanager "pacman"
-   checksystemforpackagemanager "brew"
-   checksystemforpackagemanager "snap"
+   echo "cannot install lsb_release on this system"
 else
-   if [ defaultpackagemanager="yum" ]
-   then
-      sudo yum -y update && sudo yum -y install redhat-lsb-core
-   elif [ defaultpackagemanager="dnf" ]
-   then
-      sudo dnf -y update && sudo dnf -y install redhat-lsb-core
-   elif [ defaultpackagemanager="apt-get" ]
-   then
-      sudo apt-get update -y && sudo apt-get install -y lsb-core
-   elif [ defaultpackagemanager="zypper" ]
-   then
-      sudo zypper update -y && sudo zypper install -y lsb-core
-   elif [ defaultpackagemanager="pacman" ]
-   then
-      pacman -Syu lsb-release
-   else
-      echo "cannot install lsb_release"
-   fi
+   systemosname=$(lsb_release --short --id)
+   systemosversion=$(lsb_release --short --release)
 fi
 
-echo goodnightlollol
+echo "System: $systemosname : $systemosversion"
