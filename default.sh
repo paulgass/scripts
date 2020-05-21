@@ -1,18 +1,18 @@
 #!/bin/bash
 
 checksystemforlsb () {
-   x=0
-   a=$(lsb_release --short --release)
+   systemlsb=0
+   local a=$(lsb_release --short --release)
    if [[ $a = *[0-9]* ]]
    then
-      x=1
+      systemlsb=1
    fi
    return $x
 }
 
 attemptlsbinstall () {
    $1 --version >packagemangerversion.txt 2>1
-   a=$(cat packagemangerversion.txt)
+   local a=$(cat packagemangerversion.txt)
    if [[ $a != *[0-9]* ]]
    then
       echo "$1 package manger NOT found."
@@ -42,15 +42,15 @@ systemlsb=$(checksystemforlsb)
 while [ systemlsb != 1 ]
 do
    attemptlsbinstall "yum"
-   systemlsb=$(checksystemforlsb)
+   #systemlsb=$(checksystemforlsb)
    attemptlsbinstall "dnf"
-   systemlsb=$(checksystemforlsb)
+   #systemlsb=$(checksystemforlsb)
    attemptlsbinstall "apt-get"
-   systemlsb=$(checksystemforlsb)
+   #systemlsb=$(checksystemforlsb)
    attemptlsbinstall "zypper"
-   systemlsb=$(checksystemforlsb)
+   #systemlsb=$(checksystemforlsb)
    attemptlsbinstall "pacman"
-   systemlsb=$(checksystemforlsb)
+   #systemlsb=$(checksystemforlsb)
 done
 
 systemostype="default"
