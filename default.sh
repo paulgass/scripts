@@ -55,7 +55,6 @@ do
    attemptlsbinstall "pacman"
    globallsb=$(checksystemforlsb)
    break
-esac
 done
 
 systemostype="default"
