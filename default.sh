@@ -79,7 +79,6 @@ then
    packagemanagerarray=("yum" "dnf" "apt-get" "zypper" "pacman")
    while true
    do
-      a=${packagemanagerarray[$i]}
       x=$(attemptlsbinstall "${packagemanagerarray[$i]}")
       echo "indexabove"
       echo $a
