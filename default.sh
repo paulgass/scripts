@@ -51,6 +51,7 @@ done
 
 systemostype="default"
 systemosversion="default"
+globallsb=$(checksystemforlsb)
 
 if [ $globallsb != 1 ]
 then
