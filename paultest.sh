@@ -1,17 +1,15 @@
 #!/bin/bash
-
-function myfunc()
-{
-    local  __resultvar=$1
-    local  myresult='some value'
-    if [[ "$__resultvar" ]]; then
-        eval $__resultvar="'$myresult'"
-    else
-        echo "$myresult"
-    fi
+checksystemforlsb () {
+   x=0
+   a=$(lsb_release --short --release)
+   if [[ $a = *[0-9]* ]]
+   then
+      x=1
+   fi
+   return $x
 }
 
-myfunc result
-echo $result
-result2=$(myfunc)
-echo $result2
+globallsb=$(checksystemforlsb)
+echo "here is glsb"
+echo $globallsb
+echo "here is glsb"
