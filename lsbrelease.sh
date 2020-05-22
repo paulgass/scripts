@@ -25,7 +25,7 @@ attemptlsbinstall () {
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
       elif [ $1 == "apt-get" ]
       then
-         sudo apt-get update -y && sudo apt-get install -y lsb-core
+         sudo apt-get update -y && sudo apt-get install -y lsb-release
       elif [ $1 == "zypper" ]
       then
          sudo zypper update -y && sudo zypper install -y lsb-core
