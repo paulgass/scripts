@@ -18,23 +18,23 @@ attemptlsbinstall () {
       if [ $1 == "yum" ]
       then
          sudo yum -y update && sudo yum -y install redhat-lsb-core
-         export globallsb=1
+         eval "export globallsb=1"
       elif [ $1 == "dnf" ]
       then
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
-         export globallsb=1
+         eval "export globallsb=1"
       elif [ $1 == "apt-get" ]
       then
          sudo apt-get update -y && sudo apt-get install -y lsb-core
-         export globallsb=1
+         eval "export globallsb=1"
       elif [ $1 == "zypper" ]
       then
          sudo zypper update -y && sudo zypper install -y lsb-core
-         export globallsb=1
+         eval "export globallsb=1"
       elif [ $1 == "pacman" ]
       then
          pacman -Syu lsb-release
-         export globallsb=1
+         eval "export globallsb=1"
       fi
    fi
    rm packagemangerversion.txt
@@ -54,7 +54,7 @@ done
 systemostype="default"
 systemosversion="default"
 
-if [ systemlsb == false ]
+if [ $globallsb != 1 ]
 then
    systemostype=$(sysctl kern.ostype)
    systemosversion=$(sysctl kern.osrelease)
