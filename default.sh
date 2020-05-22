@@ -1,13 +1,11 @@
 #!/bin/bash
 
 checksystemforlsb () {
-   x=0
    a=$(lsb_release --short --release)
    if [[ $a = *[0-9]* ]]
    then
-      x=1
+      export globallsb=1
    fi
-   return $x
 }
 
 attemptlsbinstall () {
@@ -37,18 +35,19 @@ attemptlsbinstall () {
    rm packagemangerversion.txt
 }
 
-globallsb=$(checksystemforlsb)
+export globallsb=0
+checksystemforlsb
 
 while [[ $globallsb != 1 ]]
 do
    attemptlsbinstall "yum"
-   globallsb=$(checksystemforlsb)
+   checksystemforlsb
    attemptlsbinstall "dnf"
-   globallsb=$(checksystemforlsb)
+   checksystemforlsb
    attemptlsbinstall "apt-get"
-   globallsb=$(checksystemforlsb)
+   checksystemforlsb
    attemptlsbinstall "zypper"
-   globallsb=$(checksystemforlsb)
+   checksystemforlsb
    attemptlsbinstall "pacman"
    break
 done
