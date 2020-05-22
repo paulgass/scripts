@@ -11,6 +11,7 @@ checksystemforlsb () {
 }
 
 attemptlsbinstall () {
+   x=0
    $1 --version >packagemangerversion.txt 2>1
    a=$(cat packagemangerversion.txt)
    if [[ $a != *[0-9]* ]]
@@ -20,37 +21,58 @@ attemptlsbinstall () {
       if [ $1 == "yum" ]
       then
          sudo yum -y update && sudo yum -y install redhat-lsb-core
+         x=1
       elif [ $1 == "dnf" ]
       then
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
+         x=1
       elif [ $1 == "apt-get" ]
       then
          sudo apt-get update -y && sudo apt-get install -y lsb-core
+         x=1
       elif [ $1 == "zypper" ]
       then
          sudo zypper update -y && sudo zypper install -y lsb-core
+         x=1
       elif [ $1 == "pacman" ]
       then
          pacman -Syu lsb-release
+         x=1
       fi
    fi
    rm packagemangerversion.txt
+   echo $x
 }
 
 globallsb=$(checksystemforlsb)
 
 while [[ $globallsb != 1 ]]
 do
-   attemptlsbinstall "yum"
-   globallsb=$(checksystemforlsb)
-   attemptlsbinstall "dnf"
-   globallsb=$(checksystemforlsb)
-   attemptlsbinstall "apt-get"
-   globallsb=$(checksystemforlsb)
-   attemptlsbinstall "zypper"
-   globallsb=$(checksystemforlsb)
-   attemptlsbinstall "pacman"
-   globallsb=$(checksystemforlsb)
+   x=$(attemptlsbinstall "yum")
+   if [ $x == 1 ]
+   then
+      break
+   fi
+   x=$(attemptlsbinstall "dnf")
+   if [ $x == 1 ]
+   then
+      break
+   fi
+   x=$(attemptlsbinstall "apt-get")
+   if [ $x == 1 ]
+   then
+      break
+   fi
+   x=$(attemptlsbinstall "zypper")
+   if [ $x == 1 ]
+   then
+      break
+   fi
+   x=$(attemptlsbinstall "pacman")
+   if [ $x == 1 ]
+   then
+      break
+   fi
    break
 done
 
