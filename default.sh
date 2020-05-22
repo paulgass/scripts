@@ -20,7 +20,8 @@ attemptlsbinstall () {
    else
       if [ $1 == "yum" ]
       then
-         sudo yum -y update && sudo yum -y install redhat-lsb-core
+         #sudo yum -y update && sudo yum -y install redhat-lsb-core
+         echo "lol yum yum yum yum yum yum yum lol"
       elif [ $1 == "dnf" ]
       then
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
@@ -76,7 +77,8 @@ then
    while true
    do
       x=$(attemptlsbinstall "${packagemanagers[$i]}")
-      if [ $x -eq 1 ]
+      echo "wtfman"
+      if [[ $x -eq 1 ]]
       then
          break
       fi
