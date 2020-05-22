@@ -44,7 +44,7 @@ attemptlsbinstall () {
 
 systemlsb=$(checksystemforlsb)
 
-while [ $systemlsb != 1 ]
+while [[ $systemlsb != 1 ]]
 do
    attemptlsbinstall "yum"
    attemptlsbinstall "dnf"
