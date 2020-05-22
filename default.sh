@@ -1,12 +1,12 @@
 #!/bin/bash
 
-globallsb=0
+export globallsb=0
 
 checksystemforlsb () {
-   local a=$(lsb_release --short --release)
+   a=$(lsb_release --short --release)
    if [[ $a = *[0-9]* ]]
    then
-      globallsb=1
+      export globallsb=1
    fi
 }
 
@@ -20,23 +20,29 @@ attemptlsbinstall () {
       if [ $1 == "yum" ]
       then
          sudo yum -y update && sudo yum -y install redhat-lsb-core
+         checksystemforlsb
       elif [ $1 == "dnf" ]
       then
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
+         checksystemforlsb
       elif [ $1 == "apt-get" ]
       then
          sudo apt-get update -y && sudo apt-get install -y lsb-core
+         checksystemforlsb
       elif [ $1 == "zypper" ]
       then
          sudo zypper update -y && sudo zypper install -y lsb-core
+         checksystemforlsb
       elif [ $1 == "pacman" ]
       then
          pacman -Syu lsb-release
+         checksystemforlsb
       fi
-      checksystemforlsb
    fi
    rm packagemangerversion.txt
 }
+
+checksystemforlsb
 
 while [[ $globallsb != 1 ]]
 do
