@@ -1,11 +1,12 @@
 #!/bin/bash
 
+systemlsb=0
+
 checksystemforlsb () {
-   local x=0
-   local a=$(lsb_release --short --release)
+   a=$(lsb_release --short --release)
    if [[ $a = *[0-9]* ]]
    then
-      x=1
+      systemlsb=1
    fi
 }
 
