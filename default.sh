@@ -49,9 +49,9 @@ do
    break
 done
 
+globallsb=$(checksystemforlsb)
 systemostype="default"
 systemosversion="default"
-globallsb=$(checksystemforlsb)
 
 if [ $globallsb != 1 ]
 then
