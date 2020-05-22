@@ -13,3 +13,29 @@ else
 fi
 
 echo goodnight
+
+
+checksystemforpython () {
+   x=0
+   a=$(python --version)
+   if [[ $a = *[0-9]* ]]
+   then
+      x=1
+      if [[ $a = *2.[0-9].[0-9]* ]]
+      then
+        x=2
+      elif [[ $a = *3.[0-9].[0-9]* ]]
+      then
+        x=3
+      fi
+   fi
+   echo $x
+}
+
+x=$(checksystemforpython)
+
+if [ $x == 0 ]
+then
+elif [ $x == 1 ]
+then
+fi

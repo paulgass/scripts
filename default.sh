@@ -11,6 +11,7 @@ checksystemforlsb () {
 }
 
 attemptlsbinstall () {
+   x=0
    $1 --version >packagemangerversion.txt 2>1
    a=$(cat packagemangerversion.txt)
    if [[ $a != *[0-9]* ]]
@@ -33,21 +34,55 @@ attemptlsbinstall () {
       then
          pacman -Syu lsb-release
       fi
+      x=$(checksystemforlsb)
    fi
    rm packagemangerversion.txt
+   return $x
+}
+
+checksystemforpython () {
+   x=0
+   a=$(python --version)
+   if [[ $a = *[0-9]* ]]
+   then
+      x=1
+      if [[ $a = *2.[0-9].[0-9]* ]]
+      then
+        x=2
+      elif [[ $a = *3.[0-9].[0-9]* ]]
+      then
+        x=3
+      fi
+   fi
+   echo $x
 }
 
 globallsb=$(checksystemforlsb)
 
-while [[ $globallsb != 1 ]]
-do
-   attemptlsbinstall "yum"
-   attemptlsbinstall "dnf"
-   attemptlsbinstall "apt-get"
-   attemptlsbinstall "zypper"
-   attemptlsbinstall "pacman"
-   break
-done
+# while [[ $globallsb != 1 ]]
+# do
+#    attemptlsbinstall "yum"
+#    attemptlsbinstall "dnf"
+#    attemptlsbinstall "apt-get"
+#    attemptlsbinstall "zypper"
+#    attemptlsbinstall "pacman"
+#    break
+# done
+
+if [ $globallsb != 1 ]
+then
+   i=0
+   packagemanagers=("yum" "dnf" "apt-get" "zypper" "pacman")
+   while true
+   do
+      x=$(attemptlsbinstall "${packagemanagers[$i]}")
+      if [ $x == 1 ]
+      then
+         break
+      fi
+   esac
+   done
+fi
 
 globallsb=$(checksystemforlsb)
 systemostype="default"
@@ -69,3 +104,9 @@ fi
 
 echo "$systemostype:$systemosversion"
 
+systempython=$(checksystemforpython)
+
+if [ $systempython -ge 0 ]
+then
+   python --version
+fi
