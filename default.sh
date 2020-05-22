@@ -56,7 +56,7 @@ done
 systemostype="default"
 systemosversion="default"
 
-if [ $globallsb != 1 ]
+if [[ $globallsb != 1 ]]
 then
    systemostype=$(sysctl kern.ostype)
    systemosversion=$(sysctl kern.osrelease)
