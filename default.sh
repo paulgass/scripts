@@ -18,23 +18,23 @@ attemptlsbinstall () {
    then
       echo "$1 package manger NOT found."
    else
-      if [[ $1 == "yum" ]]
+      if [ $1 == "yum" ]
       then
          sudo yum -y update && sudo yum -y install redhat-lsb-core
          x=1
-      elif [[ $1 == "dnf" ]]
+      elif [ $1 == "dnf" ]
       then
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
          x=1
-      elif [[ $1 == "apt-get" ]]
+      elif [ $1 == "apt-get" ]
       then
          sudo apt-get update -y && sudo apt-get install -y lsb-core
          x=1
-      elif [[ $1 == "zypper" ]]
+      elif [ $1 == "zypper" ]
       then
          sudo zypper update -y && sudo zypper install -y lsb-core
          x=1
-      elif [[ $1 == "pacman" ]]
+      elif [ $1 == "pacman" ]
       then
          pacman -Syu lsb-release
          x=1
