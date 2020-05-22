@@ -79,9 +79,12 @@ then
    while true
    do
       x=$(attemptlsbinstall "${packagemanagerarray[$i]}")
-      echo "wtfman"
+      echo "xbelow"
       echo $x
-      echo "wtfman"
+      echo "xabove"
+      echo "ibelow"
+      echo $i
+      echo "iabove"
       if [[ $x -eq 1 ]]
       then
          break
