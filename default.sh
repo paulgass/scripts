@@ -69,14 +69,14 @@ globallsb=$(checksystemforlsb)
 #    break
 # done
 
-if [ $globallsb != 1 ]
+if [ $globallsb -eq 0 ]
 then
    i=0
    packagemanagers=("yum" "dnf" "apt-get" "zypper" "pacman")
    while true
    do
       x=$(attemptlsbinstall "${packagemanagers[$i]}")
-      if [ $x == 1 ]
+      if [ $x -eq 1 ]
       then
          break
       fi
