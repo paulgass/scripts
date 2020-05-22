@@ -6,7 +6,7 @@ checksystemforlsb () {
    then
       x=1
    fi
-   return $x
+   echo $x
 }
 
 globallsb=$(checksystemforlsb)
