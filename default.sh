@@ -80,7 +80,6 @@ then
       then
          break
       fi
-   esac
    done
 fi
 
