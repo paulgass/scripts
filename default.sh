@@ -14,31 +14,33 @@ attemptlsbinstall () {
    x=0
    $1 --version >packagemangerversion.txt 2>1
    a=$(cat packagemangerversion.txt)
-   if [[ $a != *[0-9]* ]]
+   if [[ $a == *[0-9]* ]]
    then
-      echo "$1 package manger NOT found."
-   else
       if [ $1 == "yum" ]
       then
-         #sudo yum -y update && sudo yum -y install redhat-lsb-core
-         echo "lol yum yum yum yum yum yum yum lol"
+         sudo yum -y update && sudo yum -y install redhat-lsb-core
+         x=1
       elif [ $1 == "dnf" ]
       then
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
+         x=1
       elif [ $1 == "apt-get" ]
       then
          sudo apt-get update -y && sudo apt-get install -y lsb-core
+         x=1
       elif [ $1 == "zypper" ]
       then
          sudo zypper update -y && sudo zypper install -y lsb-core
+         x=1
       elif [ $1 == "pacman" ]
       then
          pacman -Syu lsb-release
+         x=1
       fi
       x=$(checksystemforlsb)
    fi
    rm packagemangerversion.txt
-   return $x
+   echo $x
 }
 
 checksystemforpython () {
@@ -73,10 +75,10 @@ globallsb=$(checksystemforlsb)
 if [ $globallsb -eq 0 ]
 then
    i=0
-   packagemanagers=("yum" "dnf" "apt-get" "zypper" "pacman")
+   packagemanagerarray=("yum" "dnf" "apt-get" "zypper" "pacman")
    while true
    do
-      x=$(attemptlsbinstall "${packagemanagers[$i]}")
+      x=$(attemptlsbinstall "${packagemanagerarray[$i]}")
       echo "wtfman"
       echo $x
       echo "wtfman"
