@@ -1,13 +1,13 @@
 #!/bin/bash
 
+globallsb=0
+
 checksystemforlsb () {
-   local x=0
    local a=$(lsb_release --short --release)
    if [[ $a = *[0-9]* ]]
    then
-      x=1
+      globallsb=1
    fi
-   return $x
 }
 
 attemptlsbinstall () {
@@ -33,6 +33,7 @@ attemptlsbinstall () {
       then
          pacman -Syu lsb-release
       fi
+      checksystemforlsb
    fi
    rm packagemangerversion.txt
 }
@@ -44,6 +45,7 @@ do
    attemptlsbinstall "apt-get"
    attemptlsbinstall "zypper"
    attemptlsbinstall "pacman"
+   break
 done
 
 systemostype="default"
