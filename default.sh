@@ -38,9 +38,6 @@ attemptlsbinstall () {
 }
 
 globallsb=$(checksystemforlsb)
-echo "here is glsb"
-echo $globallsb
-echo "here is glsb"
 
 while [[ $globallsb != 1 ]]
 do
