@@ -1,13 +1,13 @@
 #!/bin/bash
 
 checksystemforlsb () {
-   x=false
+   x=0
    a=$(lsb_release --short --release)
    if [[ $a = *[0-9]* ]]
    then
-      x=true
+      x=1
    fi
-   return x
+   echo $x
 }
 
 attemptlsbinstall () {
@@ -37,31 +37,29 @@ attemptlsbinstall () {
    rm packagemangerversion.txt
 }
 
-systemlsb=$(checksystemforlsb)
+globallsb=$(checksystemforlsb)
 
-while [ systemlsb == false ]
+while [[ $globallsb != 1 ]]
 do
    attemptlsbinstall "yum"
-   systemlsb=$(checksystemforlsb)
    attemptlsbinstall "dnf"
-   systemlsb=$(checksystemforlsb)
    attemptlsbinstall "apt-get"
-   systemlsb=$(checksystemforlsb)
    attemptlsbinstall "zypper"
-   systemlsb=$(checksystemforlsb)
    attemptlsbinstall "pacman"
-   systemlsb=$(checksystemforlsb)
+   break
 done
 
-systemosname="default"
+globallsb=$(checksystemforlsb)
+systemostype="default"
 systemosversion="default"
 
-if [ systemlsb == false ]
+if [ $globallsb != 1 ]
 then
-   echo "cannot install lsb_release on this system"
+   systemostype=$(sysctl kern.ostype)
+   systemosversion=$(sysctl kern.osrelease)
 else
-   systemosname=$(lsb_release --short --id)
+   systemostype=$(lsb_release --short --id)
    systemosversion=$(lsb_release --short --release)
 fi
 
-echo "$systemosname:$systemosversion"
+echo "$systemostype:$systemosversion"
