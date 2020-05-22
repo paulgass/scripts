@@ -1,13 +1,11 @@
 #!/bin/bash
 
 checksystemforlsb () {
-   x=0
    a=$(lsb_release --short --release)
    if [[ $a = *[0-9]* ]]
    then
-      x=1
+      export globallsb=1
    fi
-   return $x
 }
 
 attemptlsbinstall () {
@@ -20,31 +18,31 @@ attemptlsbinstall () {
       if [ $1 == "yum" ]
       then
          sudo yum -y update && sudo yum -y install redhat-lsb-core
-         systemlsb=$(checksystemforlsb)
+         export globallsb=1
       elif [ $1 == "dnf" ]
       then
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
-         systemlsb=$(checksystemforlsb)
+         export globallsb=1
       elif [ $1 == "apt-get" ]
       then
          sudo apt-get update -y && sudo apt-get install -y lsb-core
-         systemlsb=$(checksystemforlsb)
+         export globallsb=1
       elif [ $1 == "zypper" ]
       then
          sudo zypper update -y && sudo zypper install -y lsb-core
-         systemlsb=$(checksystemforlsb)
+         export globallsb=1
       elif [ $1 == "pacman" ]
       then
          pacman -Syu lsb-release
-         systemlsb=$(checksystemforlsb)
+         export globallsb=1
       fi
    fi
    rm packagemangerversion.txt
 }
 
-systemlsb=$(checksystemforlsb)
+export globallsb=0
 
-while [[ $systemlsb != 1 ]]
+while [[ $globallsb != 1 ]]
 do
    attemptlsbinstall "yum"
    attemptlsbinstall "dnf"
