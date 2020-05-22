@@ -80,6 +80,7 @@ then
       then
          break
       fi
+      ((i++))
    done
 fi
 
