@@ -78,6 +78,8 @@ then
    do
       x=$(attemptlsbinstall "${packagemanagers[$i]}")
       echo "wtfman"
+      echo $x
+      echo "wtfman"
       if [[ $x -eq 1 ]]
       then
          break
