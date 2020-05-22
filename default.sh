@@ -7,7 +7,7 @@ checksystemforlsb () {
    then
       x=1
    fi
-   return $x
+   echo "systemlsb=1"
 }
 
 attemptlsbinstall () {
