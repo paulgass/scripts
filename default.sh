@@ -20,23 +20,18 @@ attemptlsbinstall () {
       if [ $1 == "yum" ]
       then
          sudo yum -y update && sudo yum -y install redhat-lsb-core
-         checksystemforlsb 2>1
       elif [ $1 == "dnf" ]
       then
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
-         checksystemforlsb 2>1
       elif [ $1 == "apt-get" ]
       then
          sudo apt-get update -y && sudo apt-get install -y lsb-core
-         checksystemforlsb 2>1
       elif [ $1 == "zypper" ]
       then
          sudo zypper update -y && sudo zypper install -y lsb-core
-         checksystemforlsb 2>1
       elif [ $1 == "pacman" ]
       then
          pacman -Syu lsb-release
-         checksystemforlsb 2>1
       fi
    fi
    rm packagemangerversion.txt
@@ -47,9 +42,13 @@ checksystemforlsb
 while [[ $globallsb != 1 ]]
 do
    attemptlsbinstall "yum"
+   checksystemforlsb
    attemptlsbinstall "dnf"
+   checksystemforlsb
    attemptlsbinstall "apt-get"
+   checksystemforlsb
    attemptlsbinstall "zypper"
+   checksystemforlsb
    attemptlsbinstall "pacman"
    break
 done
