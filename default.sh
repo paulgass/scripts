@@ -62,23 +62,12 @@ checksystemforpython () {
 
 globallsb=$(checksystemforlsb)
 
-# while [[ $globallsb != 1 ]]
-# do
-#    attemptlsbinstall "yum"
-#    attemptlsbinstall "dnf"
-#    attemptlsbinstall "apt-get"
-#    attemptlsbinstall "zypper"
-#    attemptlsbinstall "pacman"
-#    break
-# done
-
 if [ $globallsb -eq 0 ]
 then
    arr=("yum" "dnf" "apt-get" "zypper" "pacman") 
    for i in "${arr[@]}"
    do
-      x=$(attemptlsbinstall "$i")
-      echo "this is x: $x"
+      x=$(attemptlsbinstall $i)
       if [ $x -eq 1 ]
       then
          break
