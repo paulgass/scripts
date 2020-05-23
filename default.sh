@@ -79,6 +79,7 @@ then
    for i in "${arr[@]}"
    do
       x=$(attemptlsbinstall "$i")
+      echo "this is x: $x"
       if [ $x -eq 1 ]
       then
          break
