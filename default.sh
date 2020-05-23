@@ -64,7 +64,7 @@ globallsb=$(checksystemforlsb)
 
 if [ $globallsb -eq 0 ]
 then
-   arr=("zypper" "dnf" "yum" "pacman" "apt-get" ) 
+   arr=("dnf" "apt-get" "zypper" "pacman" "yum" ) 
    for i in "${arr[@]}"
    do
       x=$(attemptlsbinstall $i)
