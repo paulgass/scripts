@@ -79,7 +79,7 @@ then
    for i in "${arr[@]}"
    do
       x=$(attemptlsbinstall "$i")
-      if [[ $x -eq 1 ]]
+      if [ $x -eq 1 ]
       then
          break
       fi      
