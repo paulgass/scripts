@@ -94,11 +94,10 @@ else
 fi
 
 systempython=$(checksystemforpython)
-systempythonversion="default"
 
 if [ $systempython -ge 0 ]
 then
-   systempythonversion=$(python --version)
+   python --version
 fi
 
-echo "System: $systemostype:$systemosversion Python: $systempythonversion"
+echo "$systemostype:$systemosversion"
