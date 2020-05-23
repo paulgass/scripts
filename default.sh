@@ -78,14 +78,11 @@ then
    arr=("yum" "dnf" "apt-get" "zypper" "pacman") 
    for i in "${arr[@]}"
    do
-      echo "didit..." 
-      echo $i
-      #x=$(attemptlsbinstall "$i")
-      #if [[ $x -eq 1 ]]
-      #then
-      #   break
-      #fi      
-      echo "...work" 
+      x=$(attemptlsbinstall "$i")
+      if [[ $x -eq 1 ]]
+      then
+         break
+      fi      
    done
 fi
 
