@@ -75,26 +75,17 @@ globallsb=$(checksystemforlsb)
 
 if [ $globallsb -eq 0 ]
 then
-   i=0
-   packagemanagerarray=("yum" "dnf" "apt-get" "zypper" "pacman")
-   while true
+   arr=("yum" "dnf" "apt-get" "zypper" "pacman") 
+   for i in "${arr[@]}"
    do
-      a="${packagemanagerarray[i]}"
-      x=$(attemptlsbinstall "${packagemanagerarray[$i]}")
-      echo "indexabove"
-      echo $a
-      echo "indexabove"
-      echo "xbelow"
-      echo $x
-      echo "xabove"
-      echo "ibelow"
+      echo "didit..." 
       echo $i
-      echo "iabove"
-      if [[ $x -eq 1 ]]
-      then
-         break
-      fi
-      ((i++))
+      #x=$(attemptlsbinstall "$i")
+      #if [[ $x -eq 1 ]]
+      #then
+      #   break
+      #fi      
+      echo "...work" 
    done
 fi
 
