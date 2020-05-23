@@ -79,7 +79,7 @@ globallsb=$(checksystemforlsb)
 systemostype="default"
 systemosversion="default"
 
-if [ $globallsb == 1 ]
+if [ $globallsb -eq 1 ]
 then
    systemostype=$(lsb_release --short --id)
    systemosversion=$(lsb_release --short --release)
