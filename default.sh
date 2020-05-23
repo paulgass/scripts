@@ -18,8 +18,7 @@ attemptlsbinstall () {
    then
       if [ $1 == "yum" ]
       then
-         #sudo yum -y update && sudo yum -y install redhat-lsb-core
-         echo "sudo yum -y update && sudo yum -y install redhat-lsb-core"
+         sudo yum -y update && sudo yum -y install redhat-lsb-core
          x=1
       elif [ $1 == "dnf" ]
       then
