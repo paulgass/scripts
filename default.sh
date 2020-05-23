@@ -64,7 +64,7 @@ globallsb=$(checksystemforlsb)
 
 if [ $globallsb -eq 0 ]
 then
-   arr=("dnf" "apt-get" "zypper" "pacman" "yum" ) 
+   arr=("yum" "dnf" "apt-get" "zypper" "pacman") 
    for i in "${arr[@]}"
    do
       x=$(attemptlsbinstall $i)
@@ -93,11 +93,12 @@ else
    fi
 fi
 
-echo "$systemostype:$systemosversion"
-
 systempython=$(checksystemforpython)
+systempythonversion="default"
 
 if [ $systempython -ge 0 ]
 then
-   python --version
+   systempythonversion=$(python --version)
 fi
+
+echo "System: $systemostype:$systemosversion Python: $systempythonversion"
