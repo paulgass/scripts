@@ -31,7 +31,6 @@ attemptlsbinstall () {
       then
          pacman -Syu lsb-release
       fi
-      x=$(checksystemforlsb)
    fi
    rm packagemangerversion.txt
 }
@@ -57,7 +56,7 @@ globallsb=$(checksystemforlsb)
 
 if [ $globallsb -eq 0 ]
 then
-   arr=("dnf" "apt-get" "zypper" "yum" "pacman") 
+   arr=("yum" "dnf" "apt-get" "zypper" "pacman") 
    for i in "${arr[@]}"
    do
       attemptlsbinstall $i
