@@ -88,22 +88,22 @@ systemos=$(echo $systemostype | tr '[:upper:]' '[:lower:]')
 
 case $systemos in
 rhel)
-	echo "Red Hat RHEL System lsb_release: $systemos:$systemosversion"
+	echo "Red Hat RHEL System lsb_release: $systemostype:$systemosversion"
 	;;
 centos)
-	echo "Linux CentOS System lsb_release: $systemos:$systemosversion"
+	echo "Linux CentOS System lsb_release: $systemostype:$systemosversion"
 	;;
 fedora)
-	echo "Linux Fedora System lsb_release: $systemos:$systemosversion"
+	echo "Linux Fedora System lsb_release: $systemostype:$systemosversion"
 	;;
 debian)
-	echo "Linux Debian System lsb_release: $systemos:$systemosversion"
+	echo "Linux Debian System lsb_release: $systemostype:$systemosversion"
 	;;
 ubuntu)
-	echo "Linux Ubuntu System lsb_release: $systemos:$systemosversion"
+	echo "Linux Ubuntu System lsb_release: $systemostype:$systemosversion"
 	;;
 darwin)
-	echo "Macos Darwin System kernel: $systemos:$systemosversion"
+	echo "Macos Darwin System kernel: $systemostype:$systemosversion"
 	;;
 *)
 	echo "Default System"
