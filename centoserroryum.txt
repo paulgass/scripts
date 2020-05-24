@@ -1,6 +1,0 @@
-Another app is currently holding the yum lock; waiting for it to exit...
-  The other application is: yum
-    Memory :  29 M RSS (353 MB VSZ)
-    Started: Thu May 21 16:55:24 2020 - 05:58 ago
-    State  : Traced/Stopped, pid: 12648
-
