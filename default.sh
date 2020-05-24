@@ -13,7 +13,7 @@ checksystemforlsb () {
 attemptlsbinstall () {
    $1 --version >packagemangerversion.txt 2>1
    a=$(cat packagemangerversion.txt)
-   if [[ $a == *[0-9]* ]]
+   if [[ $a = *[0-9]* ]]
    then
       if [ $1 == "yum" ]
       then
@@ -77,14 +77,38 @@ then
    systemostype=$(lsb_release --short --id)
    systemosversion=$(lsb_release --short --release)
 else
-   systemostype=$(sysctl kern.ostype)
-   if [[ $systemostype != *Darwin* ]]
+   systemosversion=$(sysctl kern.osrelease)
+   if [[ $systemosversion = *[0-9]* ]]
    then
-      systemosversion=$(sysctl kern.osrelease)
-   else
-      systemostype="default"
+      systemostype=$(sysctl kern.ostype)
    fi
 fi
+
+systemos=$(echo $ecsclusterarnQUOTES | tr '[:upper:]' '[:lower:]')
+
+case $systemos in
+rhel)
+	echo "Red Hat RHEL System lsb_release: $systemos:$systemosversion"
+	;;
+centos)
+	echo "Linux CentOS System lsb_release: $systemos:$systemosversion"
+	;;
+fedora)
+	echo "Linux Fedora System lsb_release: $systemos:$systemosversion"
+	;;
+debian)
+	echo "Linux Debian System lsb_release: $systemos:$systemosversion"
+	;;
+ubuntu)
+	echo "Linux Ubuntu System lsb_release: $systemos:$systemosversion"
+	;;
+darwin)
+	echo "Macos Darwin System kernel: $systemos:$systemosversion"
+	;;
+*)
+	echo "Default System"
+	;;
+esac
 
 systempython=$(checksystemforpython)
 
@@ -92,5 +116,3 @@ if [ $systempython -ge 0 ]
 then
    python --version
 fi
-
-echo "$systemostype:$systemosversion"
