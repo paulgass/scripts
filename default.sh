@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 checksystemforlsb () {
    x=0
