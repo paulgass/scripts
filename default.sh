@@ -84,7 +84,7 @@ else
    fi
 fi
 
-systemos=$(echo $ecsclusterarnQUOTES | tr '[:upper:]' '[:lower:]')
+systemos=$(echo $systemostype | tr '[:upper:]' '[:lower:]')
 
 case $systemos in
 rhel)
