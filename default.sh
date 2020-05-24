@@ -19,23 +19,18 @@ attemptlsbinstall () {
       if [ $1 == "yum" ]
       then
          sudo yum -y update && sudo yum -y install redhat-lsb-core
-         x=1
       elif [ $1 == "dnf" ]
       then
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
-         x=1
       elif [ $1 == "apt-get" ]
       then
          sudo apt-get update -y && sudo apt-get install -y lsb-core
-         x=1
       elif [ $1 == "zypper" ]
       then
          sudo zypper update -y && sudo zypper install -y lsb-core
-         x=1
       elif [ $1 == "pacman" ]
       then
          pacman -Syu lsb-release
-         x=1
       fi
       x=$(checksystemforlsb)
    fi
