@@ -11,6 +11,7 @@ checksystemforlsb () {
 }
 
 attemptlsbinstall () {
+   x=0
    $1 --version >packagemangerversion.txt 2>1
    a=$(cat packagemangerversion.txt)
    if [[ $a == *[0-9]* ]]
@@ -34,6 +35,7 @@ attemptlsbinstall () {
       x=$(checksystemforlsb)
    fi
    rm packagemangerversion.txt
+   echo $x
 }
 
 checksystemforpython () {
@@ -60,8 +62,7 @@ then
    arr=("yum" "dnf" "apt-get" "zypper" "pacman") 
    for i in "${arr[@]}"
    do
-      attemptlsbinstall $i
-      x=$(checksystemforlsb)
+      x=$(attemptlsbinstall $i)
       if [[ $x -eq 1 ]]
       then
          break
