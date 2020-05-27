@@ -112,7 +112,7 @@ esac
 
 systempython=$(checksystemforpython)
 
-if [ $systempython -ge 0 ]
+if [ $systempython -ge 1 ]
 then
    python --version
 fi
