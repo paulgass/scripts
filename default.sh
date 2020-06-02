@@ -3,7 +3,7 @@
 checksystemforlsb () {
    x=0
    a=$(lsb_release --short --release)
-   if [[ $a = *[0-9]* ]]
+   if [ $a = *[0-9]* ]
    then
       x=1
    fi
@@ -13,21 +13,22 @@ checksystemforlsb () {
 attemptlsbinstall () {
    $1 --version >packagemangerversion.txt 2>1
    a=$(cat packagemangerversion.txt)
-   if [[ $a = *[0-9]* ]]
+   if [ $a = *[0-9]* ]
    then
-      if [ $1 == "yum" ]
+      if [ "$1" = "yum" ]
       then
          sudo yum -y update && sudo yum -y install redhat-lsb-core
-      elif [ $1 == "dnf" ]
+      elif [ "$1" = "dnf" ]
       then
+         export DEBIAN_FRONTEND=noninteractive
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
-      elif [ $1 == "apt-get" ]
+      elif [ "$1" = "apt-get" ]
       then
          sudo apt-get update -y && sudo apt-get install -y lsb-core
-      elif [ $1 == "zypper" ]
+      elif [ "$1" = "zypper" ]
       then
          sudo zypper update -y && sudo zypper install -y lsb-core
-      elif [ $1 == "pacman" ]
+      elif [ "$1" = "pacman" ]
       then
          pacman -Syu lsb-release
       fi
@@ -38,13 +39,13 @@ attemptlsbinstall () {
 checksystemforpython () {
    x=0
    a=$(python --version)
-   if [[ $a = *[0-9]* ]]
+   if [ $a = *[0-9]* ]
    then
       x=1
-      if [[ $a = *2.[0-9].[0-9]* ]]
+      if [ $a = *2.[0-9].[0-9]* ]
       then
         x=2
-      elif [[ $a = *3.[0-9].[0-9]* ]]
+      elif [ $a = *3.[0-9].[0-9]* ]
       then
         x=3
       fi
@@ -70,7 +71,7 @@ then
       do
          attemptlsbinstall $i
          x=$(checksystemforlsb)
-         if [[ $x -eq 1 ]]
+         if [ $x -eq 1 ]
          then
             break
          fi
