@@ -3,7 +3,7 @@
 checksystemforlsb () {
    x=0
    a=$(lsb_release --short --release)
-   if [ $a = *[0-9]* ]
+   if [ $a =~ *[0-9]* ]
    then
       x=1
    fi
@@ -13,7 +13,7 @@ checksystemforlsb () {
 attemptlsbinstall () {
    $1 --version >packagemangerversion.txt 2>1
    a=$(cat packagemangerversion.txt)
-   if [ $a = *[0-9]* ]
+   if [ $a =~ *[0-9]* ]
    then
       if [ "$1" = "yum" ]
       then
@@ -39,13 +39,13 @@ attemptlsbinstall () {
 checksystemforpython () {
    x=0
    a=$(python --version)
-   if [ $a = *[0-9]* ]
+   if [ $a =~ *[0-9]* ]
    then
       x=1
-      if [ $a = *2.[0-9].[0-9]* ]
+      if [ $a =~ *2.[0-9].[0-9]* ]
       then
         x=2
-      elif [ $a = *3.[0-9].[0-9]* ]
+      elif [ $a =~ *3.[0-9].[0-9]* ]
       then
         x=3
       fi
