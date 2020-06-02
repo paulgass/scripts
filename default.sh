@@ -39,7 +39,7 @@ attemptlsbinstall () {
 checksystemforpython () {
    x=0
    a=$(python --version)
-   if [[ $a =~ *[0-9]* ]]
+   if [[ $a == *[0-9]* ]]
    then
       x=1
       if [[ $a == *2.[0-9].[0-9]* ]]
@@ -53,65 +53,67 @@ checksystemforpython () {
    echo $x
 }
 
+systemos="none"
 systemostype="none"
 systemosversion="none"
-systemuname=$(uname -s)
+systemarch="none"
 
-if [ "$systemuname" = "Darwin" ]
-then
-   systemostype="macos"
-   systemosversion="darwin"
-elif [ "$systemuname" = "Linux" ]
-then
-   systemlsb=$(checksystemforlsb)
-   if [ $systemlsb -eq 0 ]
-   then
-      arr=("yum" "dnf" "apt-get" "zypper" "pacman") 
-      for i in "${arr[@]}"
-      do
-         attemptlsbinstall $i
-         x=$(checksystemforlsb)
-         if [ $x -eq 1 ]
-         then
-            break
-         fi
-      done
-   fi
-   if [ $systemlsb -eq 1 ]
-   then
-      systemostype=$(lsb_release --short --id)
-      systemosversion=$(lsb_release --short --release)
-   fi
-else
-   systemostype="unknown"
-   systemosversion="unknown"
-fi
-
-systemos=$(echo $systemostype | tr '[:upper:]' '[:lower:]')
-
-case $systemos in
-rhel)
-	echo "Red Hat RHEL System lsb_release: $systemostype:$systemosversion"
-	;;
-centos)
-	echo "Linux CentOS System lsb_release: $systemostype:$systemosversion"
-	;;
-fedora)
-	echo "Linux Fedora System lsb_release: $systemostype:$systemosversion"
-	;;
-debian)
-	echo "Linux Debian System lsb_release: $systemostype:$systemosversion"
-	;;
-ubuntu)
-	echo "Linux Ubuntu System lsb_release: $systemostype:$systemosversion"
-	;;
-darwin)
-	echo "Macos Darwin System kernel: $systemostype:$systemosversion"
-	;;
-*)
-	echo "Default System: $systemostype:$systemosversion"
-	;;
+case "$(uname -s)" in
+   Linux)
+      systemos="linux"
+      systemostype="linux"
+      systemosversion=$(uname -r)
+      systemarch=$(arch)
+      fi
+      systemlsb=$(checksystemforlsb)
+      if [ $systemlsb -eq 0 ]
+      then
+         arr=("yum" "dnf" "apt-get" "zypper" "pacman") 
+         for i in "${arr[@]}"
+         do
+            attemptlsbinstall $i
+            x=$(checksystemforlsb)
+            if [ $x -eq 1 ]
+            then
+               break
+            fi
+         done
+      fi
+      if [ $systemlsb -eq 1 ]
+      then
+         systemostype=$(lsb_release --short --id)
+         systemosversion=$(lsb_release --short --release)
+      fi
+      ;;
+   Darwin)
+      systemos="macos"
+      systemostype="macos"
+      systemosversion=$(uname -r)
+      systemarch=$(arch)
+      ;;
+   CYGWIN*|MSYS*|MINGW*)
+      systemos="windows"
+      systemostype="windows"
+      systemosversion=$(uname -r)
+      wmic OS get OSArchitecture >windowsarchitecture.txt 2>1
+      winarch=$(cat windowsarchitecture.txt)
+      if [[ $winarch == *64* ]]
+      then
+         systemarch="64bit"
+      elif [[ $winarch == *32* ]]
+         systemarch="32bit"
+      fi
+      rm windowsarchitecture.txt
+      ;;
+   *)
+      systemos="default"
+      systemostype="default"
+      systemosversion=$(uname -r)
+      systemarch=$(uname -p)
+      ;;
 esac
+
+echo "OS: $systemos Type: $systemostype Version: $systemosversion Architecture: $systemarch"
 
 systempython=$(checksystemforpython)
 
