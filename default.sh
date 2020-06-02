@@ -52,36 +52,38 @@ checksystemforpython () {
    echo $x
 }
 
-globallsb=$(checksystemforlsb)
+systemostype="none"
+systemosversion="none"
+systemuname=$(uname -s)
 
-if [ $globallsb -eq 0 ]
+if [ "$systemuname" = "Darwin" ]
 then
-   arr=("yum" "dnf" "apt-get" "zypper" "pacman") 
-   for i in "${arr[@]}"
-   do
-      attemptlsbinstall $i
-      x=$(checksystemforlsb)
-      if [[ $x -eq 1 ]]
-      then
-         break
-      fi
-   done
-fi
-
-globallsb=$(checksystemforlsb)
-systemostype="default"
-systemosversion="default"
-
-if [ $globallsb -eq 1 ]
+   systemostype="macos"
+   systemosversion="darwin"
+elif [ "$systemuname" = "Linux" ]
 then
-   systemostype=$(lsb_release --short --id)
-   systemosversion=$(lsb_release --short --release)
-else
-   systemosversion=$(sysctl kern.osrelease)
-   if [[ $systemosversion = *[0-9]* ]]
+   systemlsb=$(checksystemforlsb)
+   if [ $systemlsb -eq 0 ]
    then
-      systemostype=$(sysctl kern.ostype)
+      arr=("yum" "dnf" "apt-get" "zypper" "pacman") 
+      for i in "${arr[@]}"
+      do
+         attemptlsbinstall $i
+         x=$(checksystemforlsb)
+         if [[ $x -eq 1 ]]
+         then
+            break
+         fi
+      done
    fi
+   if [ $systemlsb -eq 1 ]
+   then
+      systemostype=$(lsb_release --short --id)
+      systemosversion=$(lsb_release --short --release)
+   fi
+else
+   systemostype="unknown"
+   systemosversion="unknown"
 fi
 
 systemos=$(echo $systemostype | tr '[:upper:]' '[:lower:]')
@@ -106,7 +108,7 @@ darwin)
 	echo "Macos Darwin System kernel: $systemostype:$systemosversion"
 	;;
 *)
-	echo "Default System"
+	echo "Default System: $systemostype:$systemosversion"
 	;;
 esac
 
