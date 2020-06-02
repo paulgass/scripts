@@ -100,6 +100,7 @@ case "$(uname -s)" in
       then
          systemarch="64bit"
       elif [[ $winarch == *32* ]]
+      then
          systemarch="32bit"
       fi
       rm windowsarchitecture.txt
