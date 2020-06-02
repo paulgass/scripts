@@ -64,7 +64,6 @@ case "$(uname -s)" in
       systemostype="linux"
       systemosversion=$(uname -r)
       systemarch=$(arch)
-      fi
       systemlsb=$(checksystemforlsb)
       if [ $systemlsb -eq 0 ]
       then
