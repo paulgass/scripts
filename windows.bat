@@ -1,18 +1,23 @@
 @ECHO OFF
-SET /P port=Display Port Number:
-ECHO %port%| findstr /r "^[1-9][0-9]*$">nul
-IF %errorlevel% equ 0 (
-	NETSTAT -ano | FINDSTR :%port%
-	setlocal EnableDelayedExpansion
-	SET /P process=Kill Port %port% Process Number:
-	ECHO !process!| findstr /r "^[1-9][0-9]*$">nul
+
+SET /P menu=0.)Default Program 1.)Kill Port Process Program (0/1)
+
+IF %menu% equ 1 (
+	SET /P port=Display Port Number:
+	ECHO %port%| findstr /r "^[1-9][0-9]*$">nul
 	IF %errorlevel% equ 0 (
-		TASKKILL /PID !process! /F
+		NETSTAT -ano | FINDSTR :%port%
+		setlocal EnableDelayedExpansion
+		SET /P process=Kill Port %port% Process Number:
+		ECHO !process!| findstr /r "^[1-9][0-9]*$">nul
+		IF %errorlevel% equ 0 (
+			TASKKILL /PID !process! /F
+		)
 	)
 )
 
 
-
+:: Default script below
 
 SET /P application=Python Application Name:
 :: Install Python
