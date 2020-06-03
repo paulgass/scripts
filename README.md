@@ -1,3 +1,3 @@
-#scripts
-##default.sh
-###\#\!\/bin\/sh Script for Linux, Macos, Windows, etc.
+# scripts
+## default.sh
+### \#\!\/bin\/sh Script for Linux, Macos, Windows, etc.
