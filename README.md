@@ -7,5 +7,3 @@
 ### Script for Windows.
 ## [linuxsetup.sh](linuxsetup.sh)
 ### \#\!\/bin\/bash Script for Linux Debian for installation of common utilites.
-## [WindowsPortProcessKill.bat](WindowsPortProcessKill.bat)
-### Script for Windows for killing port process.
