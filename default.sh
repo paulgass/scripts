@@ -78,6 +78,7 @@ case "$(uname -s)" in
             fi
          done
       fi
+      systemlsb=$(checksystemforlsb)
       if [ $systemlsb -eq 1 ]
       then
          systemostype=$(lsb_release --short --id)
