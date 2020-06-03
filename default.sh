@@ -20,10 +20,10 @@ attemptlsbinstall () {
          sudo yum -y update && sudo yum -y install redhat-lsb-core
       elif [ "$1" = "dnf" ]
       then
-         export DEBIAN_FRONTEND=noninteractive
          sudo dnf -y update && sudo dnf -y install redhat-lsb-core
       elif [ "$1" = "apt-get" ]
       then
+         export DEBIAN_FRONTEND=noninteractive
          sudo apt-get update -y && sudo apt-get install -y lsb-core
       elif [ "$1" = "zypper" ]
       then
@@ -61,7 +61,7 @@ systemarch="none"
 case "$(uname -s)" in
    Linux)
       systemos="linux"
-      systemostype="linux"
+      systemostype=$(uname -s)
       systemosversion=$(uname -r)
       systemarch=$(arch)
       systemlsb=$(checksystemforlsb)
@@ -87,13 +87,13 @@ case "$(uname -s)" in
       ;;
    Darwin)
       systemos="macos"
-      systemostype="macos"
+      systemostype=$(uname -s)
       systemosversion=$(uname -r)
       systemarch=$(arch)
       ;;
    CYGWIN*|MSYS*|MINGW*)
       systemos="windows"
-      systemostype="windows"
+      systemostype=$(uname -s)
       systemosversion=$(uname -r)
       wmic OS get OSArchitecture >windowsarchitecture.txt 2>1
       winarch=$(cat windowsarchitecture.txt)
@@ -108,7 +108,7 @@ case "$(uname -s)" in
       ;;
    *)
       systemos="default"
-      systemostype="default"
+      systemostype=$(uname -s)
       systemosversion=$(uname -r)
       systemarch=$(uname -p)
       ;;
