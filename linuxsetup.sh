@@ -1,6 +1,7 @@
 #!/bin/bash
 
-if [[ $EUID -ne 0 ]]; then
+if [ $EUID -ne 0 ]
+then
    echo "THIS SCRIPT MUST BE RUN AS 'root' USER"
    exit 1
 fi
@@ -10,7 +11,7 @@ apt-get upgrade -y
 apt update -y
 apt upgrade -y
 
-apt install docker.io -y
+#apt install docker.io -y
 #sudo usermod -a -G docker $USER
 #newgrp docker
 
@@ -23,26 +24,16 @@ echo “alias pip=pip3” >> /etc/bash.bashrc
 source /etc/bash.bashrc
 pip install pipenv
 
+apt install curl -y
+curl -sL https://deb.nodesource.com/setup_12.x | bash -
+apt-get install -y nodejs
+npm install -g @vue/cli
+
 apt-get install php -y
 apt-get install r-base -y
 apt-get install r-base-dev -y
 apt install default-jre -y
 apt install default-jdk -y
-#VUE OLD NOT WORKING
-#apt install nodejs -y
-#apt install npm -y
-#npm install -g @vue/cli
-#VUE OLD NOT WORKING
-#VUE NEW/WORKING INSTALL
-#sudo apt install curl -y
-#curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
-#sudo apt-get install -y nodejs
-#sudo npm install -g @vue/cli
-#VUE NEW/WORKING INSTALL
-apt install curl -y
-curl -sL https://deb.nodesource.com/setup_12.x | bash -
-apt-get install -y nodejs
-npm install -g @vue/cli
 
 apt-get install exfat-fuse exfat-utils -y
 apt install vlc -y
