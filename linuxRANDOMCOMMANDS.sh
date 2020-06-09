@@ -29,3 +29,5 @@ ecsclusterarnWHITESPACEQUOTES=$(cat aws-ecs-clusters.json | grep $ecscluster)
 ecsclusterarnQUOTES=$(echo $ecsclusterarnWHITESPACEQUOTES | tr -d ' ')
 
 ecsclusterarn=$(echo $ecsclusterarnQUOTES | tr -d '"')
+
+curl -sSL https://get.docker.com/ | sh
