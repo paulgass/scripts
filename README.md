@@ -5,5 +5,3 @@
 ### \#\!\/bin\/zsh Script for Macos.
 ## [windows.bat](windows.bat)
 ### Script for Windows.
-## [linuxsetup.sh](linuxsetup.sh)
-### \#\!\/bin\/bash Script for Linux Debian for installation of common utilites.
